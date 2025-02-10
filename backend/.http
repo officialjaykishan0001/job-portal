@@ -1,0 +1,89 @@
+# POST  http://localhost:8000/api/v1/user/register 
+# Content-Type: application/json
+
+# {
+#     "fullname": "Keshav1",
+#     "email": "keshav1@gmail.com",
+#     "phoneNumber": "1234567890",
+#     "password": "keshav1",
+#     "role": "student"
+# }
+
+# POST  http://localhost:8000/api/v1/user/login 
+# Content-Type: application/json
+
+# {
+#     "email": "keshav1@gmail.com",
+#     "password": "keshav1",
+#     "role": "student"
+# }
+
+# POST  http://localhost:8000/api/v1/user/profile/update 
+# Content-Type: application/json
+
+# {
+#     "fullname": "Patel"
+# }
+
+# GET  http://localhost:8000/api/v1/user/logout 
+
+# POST  http://localhost:8000/api/v1/company/register 
+# Content-Type: application/json
+
+# {
+#     "companyName": "Google"
+# }
+
+# GET   http://localhost:8000/api/v1/company/get 
+
+# GET   http://localhost:8000/api/v1/company/get/67a7667e85e8fd4222ecf50f/ 
+
+# PUT   http://localhost:8000/api/v1/company/update/67a7667e85e8fd4222ecf50f/ 
+# Content-Type: application/json
+
+# {
+#     "name": "PatelMernStackIndia"
+# }
+
+
+# POST   http://localhost:8000/api/v1/job/post 
+# Content-Type: application/json
+
+# {
+#     "title": "Frontend Developer",
+#     "description": "I want frontend developer for my company",
+#     "requirements": "Reactjs, Shadcnui, Apis Testing",
+#     "salary": "12",
+#     "location": "Hyderabad",
+#     "jobType": "Full time",
+#     "experience": 1,
+#     "position": "12",
+#     "companyId": "67a7667e85e8fd4222ecf50f"
+# }
+
+
+# GET   http://localhost:8000/api/v1/job/get 
+
+# GET   http://localhost:8000/api/v1/job/getadminjobs
+
+
+# GET   http://localhost:8000/api/v1/job/get/67a85fb99613dd7a36b24a4c
+
+
+
+
+
+
+# GET  http://localhost:8000/api/v1/application/apply/67a85fb99613dd7a36b24a4c 
+
+
+# GET  http://localhost:8000/api/v1/application/get 
+
+# GET  http://localhost:8000/api/v1/application/67a85fb99613dd7a36b24a4c/applicants
+
+POST   http://localhost:8000/api/v1/application/status/67a95b2696956953f0611ba2/update  
+Content-Type: application/json
+
+{
+    "status": "accepted"
+}
