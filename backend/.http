@@ -81,9 +81,9 @@
 
 # GET  http://localhost:8000/api/v1/application/67a85fb99613dd7a36b24a4c/applicants
 
-POST   http://localhost:8000/api/v1/application/status/67a95b2696956953f0611ba2/update  
-Content-Type: application/json
+# POST   http://localhost:8000/api/v1/application/status/67a95b2696956953f0611ba2/update  
+# Content-Type: application/json
 
-{
-    "status": "accepted"
-}
+# {
+#     "status": "accepted"
+# }
