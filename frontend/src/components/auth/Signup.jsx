@@ -4,6 +4,10 @@ import Navbar from '../shared/Navbar'
 import axios from 'axios'
 import { USER_API_END_POINT } from '../../utils/constant'
 import toast from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
+import store from '../../redux/store'
+import { setLoading } from '../../redux/authSlice'
+import { Loader2 } from 'lucide-react'
 
 const Signup = () => {
     const [input, setInput] = useState({
@@ -14,6 +18,8 @@ const Signup = () => {
         role: "",
         file: ""
     });
+    const { loading } =  useSelector(store => store.auth)
+    const dispath = useDispatch();
     const navigate = useNavigate();
 
     const changeEventHandler = (e) => {
@@ -24,6 +30,7 @@ const Signup = () => {
     }
     const submitHandler = async (e) => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.append("fullname", input.fullname)
         formData.append("email", input.email)
@@ -34,19 +41,22 @@ const Signup = () => {
             formData.append("file", input.file)
         }
         try {
+            dispath(setLoading(true));
             const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
                 withCredentials: true,
             })
-            if(res.data.success){
+            if (res.data.success) {
                 navigate('/login')
                 toast.success(res.data.message);
             }
         } catch (err) {
             console.log(err)
             toast.error(err.response.data.message);
+        } finally{
+            dispath(setLoading(false))
         }
     }
     return (
@@ -137,7 +147,10 @@ const Signup = () => {
                             />
                         </div>
                     </div>
-                    <button type='submit' className='w-full my-4 border border-black p-1 bg-black text-white rounded-md font-medium'>Signup</button>
+                    {
+                        loading ? <button className='flex  justify-center items-center w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium '> <Loader2 className='m-2 h-4 w-4 animate-spin' /> <span>Please wait!</span> </button> : <button type='submit' className='w-full my-4 border border-black p-1 bg-black text-white rounded-md font-medium'>Signup</button>
+                    }
+                    
                     <span className='text-sm'>Already have an account? <Link to='/login' className='text-blue-600'>Login</Link></span>
                 </form>
             </div>

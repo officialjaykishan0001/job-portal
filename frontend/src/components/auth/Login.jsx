@@ -4,6 +4,9 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom'
 import { USER_API_END_POINT } from '../../utils/constant';
 import Navbar from '../shared/Navbar'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from '../../redux/authSlice';
+import { Loader2 } from 'lucide-react';
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -11,14 +14,17 @@ const Login = () => {
     password: "",
     role: "",
   });
+  const { loading } = useSelector(store => store.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    dispatch(setLoading(true));
     try {
       const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
         headers: {
@@ -34,6 +40,8 @@ const Login = () => {
       console.log(err)
       toast.error(err.response.data.message);
 
+    } finally {
+      dispatch(setLoading(false));
     }
   }
 
@@ -91,7 +99,9 @@ const Login = () => {
               <label htmlFor="">Recruiter</label>
             </div>
           </div>
-          <button type='submit' className='w-full my-4 border border-black p-1 bg-black text-white rounded-md font-medium'>Login</button>
+          {
+            loading ? <button  className='flex  justify-center items-center w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium '> <Loader2 className='m-2 h-4 w-4 animate-spin' /> <span>Please wait!</span> </button> : <button type='submit' className='w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium'>Login</button>
+          }
           <span className='text-sm'>Don't have an account? <Link to='/signup' className='text-blue-600'>Signup</Link></span>
         </form>
       </div>
