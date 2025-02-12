@@ -14,15 +14,16 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center gap-12'>
                     <ul className='flex font-medium items-center gap-5 '>
-                        <li>Home</li>
-                        <li>Jobs</li>
-                        <li>Browse</li>
+                        <li><Link to='/'>Home</Link> </li>
+                        <li><Link to='/jobs'>Jobs</Link> </li>
+                        <li><Link to='/browse'>Browse</Link> </li>
+                        
                     </ul>
                     {
                         !user ? (
                             <div className='flex gap-2  items-center'>
-                                <Link to='/login'><Button variant="outline" >Login</Button></Link>
-                                <Link to='/signup'><Button className='bg-[#6A38C2] hover:bg-[#5b30a6] cursor-pointer'>Signup</Button></Link>
+                                <Link to='/login'><Button  color="gray" variant="outline" highContrast>Login</Button></Link>
+                                <Link to='/signup'><Button style={{ backgroundColor: "#7209b7", color: "white" }} className='bg-[#6A38C2] hover:bg-[#5b30a6] cursor-pointer'>Signup</Button></Link>
                             </div>
                         ) : (
                             <Popover.Root>
