@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { USER_API_END_POINT } from '../../utils/constant';
 import Navbar from '../shared/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '../../redux/authSlice';
+import { setLoading, setUser } from '../../redux/authSlice';
 import { Loader2 } from 'lucide-react';
 
 const Login = () => {
@@ -33,6 +33,7 @@ const Login = () => {
         withCredentials: true,
       })
       if (res.data.success) {
+        dispatch(setUser(res.data.user));
         navigate('/')
         toast.success(res.data.message);
       }
@@ -100,7 +101,7 @@ const Login = () => {
             </div>
           </div>
           {
-            loading ? <button  className='flex  justify-center items-center w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium '> <Loader2 className='m-2 h-4 w-4 animate-spin' /> <span>Please wait!</span> </button> : <button type='submit' className='w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium'>Login</button>
+            loading ? <button className='flex  justify-center items-center w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium '> <Loader2 className='m-2 h-4 w-4 animate-spin' /> <span>Please wait!</span> </button> : <button type='submit' className='w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium'>Login</button>
           }
           <span className='text-sm'>Don't have an account? <Link to='/signup' className='text-blue-600'>Signup</Link></span>
         </form>

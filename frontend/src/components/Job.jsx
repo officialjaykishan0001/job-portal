@@ -2,8 +2,11 @@ import { Avatar, AvatarImage, Badge } from '@radix-ui/themes'
 import { Button } from '@radix-ui/themes'
 import { Bookmark } from 'lucide-react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Job = () => {
+    const navigate = useNavigate();
+    const jobId = "jfkjsdlj"
     return (
         <div className='p-5 rounded-md shadow-xl bg-white border border-gray-100'>
             <div className='flex items-center justify-between'>
@@ -36,7 +39,7 @@ const Job = () => {
             </div>
 
             <div className='flex items-center gap-4 mt-4'>
-            <Button color="gray" variant="outline" highContrast>Details</Button>
+            <Button onClick={() => navigate(`/description/${jobId}`)} color="gray" variant="outline" highContrast> Details</Button>
                 <Button style={{ backgroundColor: "#7209b7", color: "white" }}>Save for Later</Button>
             </div>
         </div>

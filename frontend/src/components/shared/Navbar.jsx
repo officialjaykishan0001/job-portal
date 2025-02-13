@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Text, Popover, Avatar, Strong } from '@radix-ui/themes';
 import { LogOut, User2, } from 'lucide-react'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
-    const user = false;
+    const { user } = useSelector(store => store.auth);
 
     return (
         <div className='bg-white '>
@@ -17,12 +18,12 @@ const Navbar = () => {
                         <li><Link to='/'>Home</Link> </li>
                         <li><Link to='/jobs'>Jobs</Link> </li>
                         <li><Link to='/browse'>Browse</Link> </li>
-                        
+
                     </ul>
                     {
                         !user ? (
                             <div className='flex gap-2  items-center'>
-                                <Link to='/login'><Button  color="gray" variant="outline" highContrast>Login</Button></Link>
+                                <Link to='/login'><Button color="gray" variant="outline" highContrast>Login</Button></Link>
                                 <Link to='/signup'><Button style={{ backgroundColor: "#7209b7", color: "white" }} className='bg-[#6A38C2] hover:bg-[#5b30a6] cursor-pointer'>Signup</Button></Link>
                             </div>
                         ) : (
@@ -49,7 +50,7 @@ const Navbar = () => {
                                     <div className="my-2 ">
                                         <div className="text-sm flex w-fit items-center gap-2 cursor-pointer mb-2">
                                             <User2 />
-                                            <a href="#"><Strong>View Profile</Strong> </a>
+                                            <a href="#"><Strong><Link to='/profile'>View Profile</Link></Strong> </a>
                                         </div>
                                         <div className="text-sm flex w-fit items-center gap-2 cursor-pointer ">
                                             <LogOut />
