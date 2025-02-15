@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Text, Popover, Avatar, Strong } from '@radix-ui/themes';
+import { Button, Popover, Avatar, Strong } from '@radix-ui/themes';
 import { LogOut, User2, } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
@@ -33,9 +33,20 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center gap-12'>
                     <ul className='flex font-medium items-center gap-5 '>
-                        <li><Link to='/'>Home</Link> </li>
-                        <li><Link to='/jobs'>Jobs</Link> </li>
-                        <li><Link to='/browse'>Browse</Link> </li>
+                        {
+                            user && user.role === 'recruiter' ? (
+                                <>
+                                    <li><Link to='/admin/companies'>Companies</Link> </li>
+                                    <li><Link to='/admin/jobs'>Jobs</Link> </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li><Link to='/'>Home</Link> </li>
+                                    <li><Link to='/jobs'>Jobs</Link> </li>
+                                    <li><Link to='/browse'>Browse</Link> </li>
+                                </>
+                            )
+                        }
 
                     </ul>
                     {
@@ -68,10 +79,16 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <div className="my-2 ">
-                                        <div className="text-sm flex w-fit items-center gap-2 cursor-pointer mb-2">
-                                            <User2 />
-                                            <a href="#"><Strong><Link to='/profile'>View Profile</Link></Strong> </a>
-                                        </div>
+                                        {
+                                            user && user.role === 'student' && (
+                                                <>
+                                                    <div className="text-sm flex w-fit items-center gap-2 cursor-pointer mb-2">
+                                                        <User2 />
+                                                        <a href="#"><Strong><Link to='/profile'>View Profile</Link></Strong> </a>
+                                                    </div>
+                                                </>
+                                            ) 
+                                        }
                                         <div className="text-sm flex w-fit items-center gap-2 cursor-pointer ">
                                             <LogOut />
                                             <a href="#" onClick={logoutHandler}><Strong>Logout</Strong> </a>
