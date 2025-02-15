@@ -1,12 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Text, Popover, Avatar, Strong } from '@radix-ui/themes';
 import { LogOut, User2, } from 'lucide-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import { USER_API_END_POINT } from '../../utils/constant';
+import toast from 'react-hot-toast';
+import { setUser } from '../../redux/authSlice';
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth);
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logoutHandler = async () => {
+        try {
+            const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+            if (res.data.success) {
+                dispatch(setUser(null));
+                navigate('/')
+                toast.success(res.data.message)
+            }
+        } catch (err) {
+            console.log(err)
+            toast.error(err.response.data.message);
+        }
+    }
     return (
         <div className='bg-white '>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
@@ -31,20 +49,22 @@ const Navbar = () => {
                                 <Popover.Trigger>
                                     <Avatar
                                         className='cursor-pointer'
-                                        src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
+                                        src={user?.profile?.profilePhoto}
                                         fallback="A"
+                                        radius='full'
                                     />
                                 </Popover.Trigger>
                                 <Popover.Content className='w-80'>
                                     <div className='flex gap-4 space-y-2'>
                                         <Avatar
                                             className='cursor-pointer'
-                                            src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
+                                            src={user?.profile?.profilePhoto}
                                             fallback="A"
+                                            radius='full'
                                         />
                                         <div>
-                                            <h4 className='font-medium '>Patel Mernstack</h4>
-                                            <p className='text-sm text-muted-foreground'>Lorem ipsum dolor sit amet.</p>
+                                            <h4 className='font-medium '>{user?.fullname}</h4>
+                                            <p className='text-sm text-muted-foreground'>{user?.profile?.bio}</p>
                                         </div>
                                     </div>
                                     <div className="my-2 ">
@@ -54,7 +74,7 @@ const Navbar = () => {
                                         </div>
                                         <div className="text-sm flex w-fit items-center gap-2 cursor-pointer ">
                                             <LogOut />
-                                            <a href="#"><Strong>Logout</Strong> </a>
+                                            <a href="#" onClick={logoutHandler}><Strong>Logout</Strong> </a>
                                         </div>
                                     </div>
                                 </Popover.Content>

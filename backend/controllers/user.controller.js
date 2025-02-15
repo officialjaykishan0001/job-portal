@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const getDataUri = require('../utils/datauri');
-const cloudinary  = require('../utils/cloudinary');
+const cloudinary = require('../utils/cloudinary');
 
 exports.register = async (req, res) => {
     try {
@@ -12,7 +12,11 @@ exports.register = async (req, res) => {
             return res.status(400).json({ message: 'Something is missing', success: false });
         }
 
-        const user = await User.findOne({ email }); // ✅ FIXED
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
+        const user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({ message: 'User already exists with this email', success: false });
         }
@@ -23,7 +27,10 @@ exports.register = async (req, res) => {
             email,
             phoneNumber,
             password: hashedPassword,
-            role
+            role,
+            profile: {
+                profilePhoto: cloudResponse.secure_url,
+            }
         });
 
         return res.status(201).json({ message: 'Account created successfully', success: true });
@@ -94,7 +101,7 @@ exports.updateProfile = async (req, res) => {
         const file = req.file;
 
         // Cloudinary setup will be added later
-        const fileUri  = getDataUri(file);
+        const fileUri = getDataUri(file);
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
 
@@ -119,7 +126,7 @@ exports.updateProfile = async (req, res) => {
         if (skillsArray) user.profile.skills = skillsArray
 
         // Resume handling will be added later
-        if(cloudResponse){
+        if (cloudResponse) {
             user.profile.resume = cloudResponse.secure_url;
             user.profile.resumeOrignalName = file.originalname;
         }
