@@ -2,8 +2,8 @@
 # Content-Type: application/json
 
 # {
-#     "fullname": "Keshav1",
-#     "email": "keshav1@gmail.com",
+#     "fullname": "patel",
+#     "email": "patelsmernstack@gmail.com",
 #     "phoneNumber": "1234567890",
 #     "password": "keshav1",
 #     "role": "student"
@@ -13,9 +13,9 @@
 # Content-Type: application/json
 
 # {
-#     "email": "keshav1@gmail.com",
-#     "password": "keshav1",
-#     "role": "student"
+#     "email": "jaykishankharwar215@gmail.com",
+#     "password": "jaykishan215",
+#     "role": "recruiter"
 # }
 
 # POST  http://localhost:8000/api/v1/user/profile/update 
@@ -46,20 +46,20 @@
 # }
 
 
-# POST   http://localhost:8000/api/v1/job/post 
-# Content-Type: application/json
+POST   http://localhost:8000/api/v1/job/post 
+Content-Type: application/json
 
-# {
-#     "title": "Frontend Developer",
-#     "description": "I want frontend developer for my company",
-#     "requirements": "Reactjs, Shadcnui, Apis Testing",
-#     "salary": "12",
-#     "location": "Hyderabad",
-#     "jobType": "Full time",
-#     "experience": 1,
-#     "position": "12",
-#     "companyId": "67a7667e85e8fd4222ecf50f"
-# }
+{
+    "title": "Backend Developer",
+    "description": "I want Backend developer for my company",
+    "requirements": "nodejs, express, mongodb",
+    "salary": "20",
+    "location": "Banguluru",
+    "jobType": "Part time",
+    "experience": 1,
+    "position": "0",
+    "companyId": "67b0a6361e0dd962b8b53e44"
+}
 
 
 # GET   http://localhost:8000/api/v1/job/get 
