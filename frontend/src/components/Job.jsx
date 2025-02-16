@@ -25,7 +25,7 @@ const Job = ({ job }) => {
             <div className="flex items-center gap-2 my-2">
                 <Avatar
                     className='cursor-pointer'
-                    src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
+                    src={job?.company?.logo}
                     fallback="A"
                     size="1"
                 />
