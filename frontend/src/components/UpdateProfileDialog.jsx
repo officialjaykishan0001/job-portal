@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Dialog, Flex, Inset, Table, Text, TextField } from '@radix-ui/themes'
-import { Axis3DIcon, Loader2 } from 'lucide-react';
+import { Dialog } from '@radix-ui/themes'
+import { Loader2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -55,7 +55,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         } catch (err) {
             console.log(err);
             toast.error(err.response.data.message);
-        } finally{
+        } finally {
             setLoading(false)
         }
         setOpen(false);
@@ -93,7 +93,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <label htmlFor="file" className='text-right'>Resume</label>
-                                <input onChange={fileChangeHandler} type="file" id="file" name='file' accept='application/pdf'  className='col-span-3 border border-gray-200 rounded-md' />
+                                <input onChange={fileChangeHandler} type="file" id="file" name='file' accept='application/pdf' className='col-span-3 border border-gray-200 rounded-md' />
                             </div>
                         </div>
                         {

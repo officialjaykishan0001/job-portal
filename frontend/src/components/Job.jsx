@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage, Badge } from '@radix-ui/themes'
+import { Avatar, Badge } from '@radix-ui/themes'
 import { Button } from '@radix-ui/themes'
 import { Bookmark } from 'lucide-react'
 import React from 'react'

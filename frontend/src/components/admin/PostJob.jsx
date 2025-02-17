@@ -1,5 +1,5 @@
-import { Button, Select } from '@radix-ui/themes';
-import axios, { AxiosHeaders } from 'axios';
+import {  Select } from '@radix-ui/themes';
+import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
