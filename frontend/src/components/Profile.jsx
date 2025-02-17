@@ -2,6 +2,7 @@ import { Avatar, Badge } from '@radix-ui/themes'
 import { Contact, Mail, Pen } from 'lucide-react'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import useGetAppliedJobs from '../hooks/useGetAppliedJobs'
 import AppliedJobTable from './AppliedJobTable'
 import Navbar from './shared/Navbar'
 import UpdateProfileDialog from './UpdateProfileDialog'
@@ -9,8 +10,10 @@ import UpdateProfileDialog from './UpdateProfileDialog'
 // const skills = ["html", "css", "Javascripts", "Reactjs"]
 const isResume = true
 const Profile = () => {
+    useGetAppliedJobs();
     const [open, setOpen] = useState(false);
     const { user } = useSelector(store => store.auth)
+    
     return (
         <div>
             <Navbar />

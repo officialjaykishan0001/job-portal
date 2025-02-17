@@ -1,7 +1,10 @@
 import { Table, Badge } from '@radix-ui/themes'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const AppliedJobTable = () => {
+    const { allAppliedJobs} = useSelector(store => store.job);
+
     return (
         <div>
             <Table.Root>
@@ -16,36 +19,16 @@ const AppliedJobTable = () => {
 
                 <Table.Body>
                     {
-                        [1, 2].map((item, index) => (
-                            <Table.Row key={index}>
-                                <Table.Cell>17-07-2024</Table.Cell>
-                                <Table.Cell>Frontend Developer</Table.Cell>
-                                <Table.Cell>Google</Table.Cell>
-                                <Table.Cell className='text-right'><Badge color="green">Selected</Badge></Table.Cell>
+                        allAppliedJobs.length <= 0 ? <span>You haven't applied any job yet!</span> : allAppliedJobs?.map((appliedJob) => (
+                            <Table.Row key={appliedJob._id}>
+                                <Table.Cell>{appliedJob?.createdAt.split('T')[0]}</Table.Cell>
+                                <Table.Cell>{appliedJob?.job?.title}</Table.Cell>
+                                <Table.Cell>{appliedJob?.job?.company?.name}</Table.Cell>
+                                <Table.Cell className='text-right'><Badge color={appliedJob?.status === 'rejected' ? 'red' : appliedJob?.status === 'pending' ? 'gray' : 'green'} >{appliedJob.status.toUpperCase()}</Badge></Table.Cell>
                             </Table.Row>
                         ))
                     }
                 </Table.Body>
-                {/* 
-                <Table.Body>
-                    <Table.Row>
-                        <Table.RowHeaderCell>Danilo Sousa</Table.RowHeaderCell>
-                        <Table.Cell>danilo@example.com</Table.Cell>
-                        <Table.Cell>Developer</Table.Cell>
-                    </Table.Row>
-
-                    <Table.Row>
-                        <Table.RowHeaderCell>Zahra Ambessa</Table.RowHeaderCell>
-                        <Table.Cell>zahra@example.com</Table.Cell>
-                        <Table.Cell>Admin</Table.Cell>
-                    </Table.Row>
-
-                    <Table.Row>
-                        <Table.RowHeaderCell>Jasper Eriksson</Table.RowHeaderCell>
-                        <Table.Cell>jasper@example.com</Table.Cell>
-                        <Table.Cell>Developer</Table.Cell>
-                    </Table.Row>
-                </Table.Body> */}
             </Table.Root>
 
         </div>
