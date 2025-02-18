@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../shared/Navbar'
 import axios from 'axios'
@@ -18,7 +18,7 @@ const Signup = () => {
         role: "",
         file: ""
     });
-    const { loading } =  useSelector(store => store.auth)
+    const { loading, user } = useSelector(store => store.auth)
     const dispath = useDispatch();
     const navigate = useNavigate();
 
@@ -55,10 +55,16 @@ const Signup = () => {
         } catch (err) {
             console.log(err)
             toast.error(err.response.data.message);
-        } finally{
+        } finally {
             dispath(setLoading(false))
         }
     }
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    })
+
     return (
         <div>
             <Navbar />
@@ -150,7 +156,7 @@ const Signup = () => {
                     {
                         loading ? <button className='flex  justify-center items-center w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium '> <Loader2 className='m-2 h-4 w-4 animate-spin' /> <span>Please wait!</span> </button> : <button type='submit' className='w-full my-4 border border-black p-1 bg-black text-white rounded-md font-medium'>Signup</button>
                     }
-                    
+
                     <span className='text-sm'>Already have an account? <Link to='/login' className='text-blue-600'>Login</Link></span>
                 </form>
             </div>
