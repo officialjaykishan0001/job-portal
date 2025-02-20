@@ -49,7 +49,7 @@ const ApplicantsTable = () => {
                                 <Table.Cell>{item?.applicant?.phoneNumber}</Table.Cell>
                                 <Table.Cell>
                                     {
-                                        item?.applicant?.profile?.resume ? <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target='_blank' > {item?.applicant?.profile?.resumeOrignalName}</a> : <span>NA</span>
+                                        item?.applicant?.profile?.resume ? <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target='_blank'  rel="noreferrer" > {item?.applicant?.profile?.resumeOrignalName}</a> : <span>NA</span>
                                     }
 
                                 </Table.Cell>

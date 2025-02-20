@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Badge, Avatar, Popover, Button, Text } from '@radix-ui/themes'
+import { Table, Avatar, Popover, Button, Text } from '@radix-ui/themes'
 import { Edit2, MoreHorizontal } from 'lucide-react'
 import { useSelector } from 'react-redux'
-import { setSearchCompanyByText } from '../../redux/companySlice'
 import { useNavigate } from 'react-router-dom'
 
 const CompaniesTable = () => {

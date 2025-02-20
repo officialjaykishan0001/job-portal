@@ -15,7 +15,7 @@ const Companies = () => {
 
     useEffect(() => {
         dispatch(setSearchCompanyByText(input));
-    }, [input])
+    }, [input, dispatch])
     return (
         <div>
             <Navbar />
