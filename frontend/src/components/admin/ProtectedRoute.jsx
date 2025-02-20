@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
         if (user === null || user.role !== 'recruiter') {
             navigate('/');
         }
-    }, []);
+    }, [navigate, user]);
 
     return (
         <>

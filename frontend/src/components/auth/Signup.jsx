@@ -5,7 +5,6 @@ import axios from 'axios'
 import { USER_API_END_POINT } from '../../utils/constant'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import store from '../../redux/store'
 import { setLoading } from '../../redux/authSlice'
 import { Loader2 } from 'lucide-react'
 

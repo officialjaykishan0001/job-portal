@@ -84,14 +84,14 @@ const Navbar = () => {
                                                 <>
                                                     <div className="text-sm flex w-fit items-center gap-2 cursor-pointer mb-2">
                                                         <User2 />
-                                                        <a href="#"><Strong><Link to='/profile'>View Profile</Link></Strong> </a>
+                                                        <Strong><Link to='/profile'>View Profile</Link></Strong>
                                                     </div>
                                                 </>
                                             ) 
                                         }
                                         <div className="text-sm flex w-fit items-center gap-2 cursor-pointer ">
                                             <LogOut />
-                                            <a href="#" onClick={logoutHandler}><Strong>Logout</Strong> </a>
+                                            <Strong onClick={logoutHandler}>Logout</Strong>
                                         </div>
                                     </div>
                                 </Popover.Content>

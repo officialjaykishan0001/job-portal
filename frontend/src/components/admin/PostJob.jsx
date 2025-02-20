@@ -4,11 +4,10 @@ import { Loader2 } from 'lucide-react';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { JOB_API_END_POINT } from '../../utils/constant';
 import Navbar from '../shared/Navbar'
 
-const companyArray = [];
 
 const PostJob = () => {
     const [input, setInput] = useState({
@@ -32,7 +31,7 @@ const PostJob = () => {
 
 
     const selectChangeHandler = (value) => {
-        const selectedCompany = companies.find((company) => company.name.toLowerCase() == value);
+        const selectedCompany = companies.find((company) => company.name.toLowerCase() === value);
         setInput({ ...input, companyId: selectedCompany._id });
     }
 
@@ -171,7 +170,7 @@ const PostJob = () => {
                         loading ? <button className='flex  justify-center items-center w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium '> <Loader2 className='m-2 h-4 w-4 animate-spin' /> <span>Please wait!</span> </button> : <button type='submit' className='w-full my-4 border border-black p-1 b bg-black text-white rounded-md font-medium'>Post New Job</button>
                     }
                     {
-                        companies.length == 0 && <p className='text-xs text-red-600 text-center my-3'>*Please register a company first, before posting a job</p>
+                        companies.length === 0 && <p className='text-xs text-red-600 text-center my-3'>*Please register a company first, before posting a job</p>
                     }
                 </form>
             </div>
