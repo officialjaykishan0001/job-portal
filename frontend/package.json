@@ -13,6 +13,7 @@
     "cra-template": "1.2.0",
     "framer-motion": "^12.4.3",
     "lucide-react": "^0.475.0",
+    "postcss-calc": "8.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.5.1",
