@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
         };
 
         return res.status(200)
-            .cookie('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'none', secure: true }) 
+            .cookie('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'none', secure: true })
             .json({ message: `Welcome back ${user.fullname}`, user, success: true });
 
     } catch (err) {
@@ -101,8 +101,14 @@ exports.updateProfile = async (req, res) => {
         const file = req.file;
 
         // Cloudinary setup will be added later
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        let cloudResponse = '';
+        if (file) {
+            const fileUri = getDataUri(file);
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+                resource_type: "auto", 
+                format: "pdf",
+            });
+        }
 
 
 
@@ -111,8 +117,7 @@ exports.updateProfile = async (req, res) => {
             skillsArray = skills.split(',');
         }
 
-        const userId = req.user ? req.user.id : req.id; // ✅ FIXED: Ensure `req.user.id` is available
-
+        const userId = req.user ? req.user.id : req.id;
         let user = await User.findById(userId);
 
         if (!user) {

@@ -7,8 +7,6 @@ import AppliedJobTable from './AppliedJobTable'
 import Navbar from './shared/Navbar'
 import UpdateProfileDialog from './UpdateProfileDialog'
 
-// const skills = ["html", "css", "Javascripts", "Reactjs"]
-const isResume = true
 const Profile = () => {
     useGetAppliedJobs();
     const [open, setOpen] = useState(false);
@@ -22,7 +20,7 @@ const Profile = () => {
                     <div className="flex items-center gap-4">
                         <Avatar
                             className='cursor-pointer'
-                            src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
+                            src={user?.profile?.profilePhoto}
                             fallback="A"
                             radius='full'
                             size='4'
@@ -48,14 +46,14 @@ const Profile = () => {
                     <h1>Skills</h1>
                     <div className="flex items-center gap-1">
                         {
-                            user?.profile?.skills.length !== 0 ? user?.profile?.skills.map((item, index) => <Badge key={index} className="">{item}</Badge>) : <span>Not Applicable</span>
+                            user?.profile?.skills.length !== 0 ? user?.profile?.skills.map((item, index) => <Badge key={index} className="">{item}</Badge>) : <span>NA</span>
                         }
                     </div>
                 </div>
                 <div className='grid w-full max-w-sm items-center gap-1.5 '>
                     <label className='text-medium font-bold'>Resume</label>
                     {
-                        isResume ? <a target='blank' href={user?.profile?.resume} className='blue-500 w-full hover:underline cursor-pointer'>{user?.profile?.resumeOrignalName}</a> : <span>NA</span>
+                        user?.profile?.resume ? <a target='blank' href={user?.profile?.resume} className='blue-500 w-full hover:underline cursor-pointer'>{user?.profile?.resumeOrignalName}</a> : <span>NA</span>
                     }
                 </div>
 
